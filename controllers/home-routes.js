@@ -1,6 +1,6 @@
 // import routes and models
 const router = require('express').Router();
-const { Comment, Pet, Post, User } = require('../models');
+const { Comment, Post, User } = require('../models');
 
 // dashboard route
 router.get('/', async(req, res) => {
@@ -18,16 +18,6 @@ try {
 } catch (err) {
   res.status(500).json(err);
 }
-});
-
-// new pet route
-router.get('/create-pet', (req, res) => {
-
-});
-
-// edit pet route
-router.get('/edit-pet/:id', async(req, res) => {
-
 });
 
 // new post route
