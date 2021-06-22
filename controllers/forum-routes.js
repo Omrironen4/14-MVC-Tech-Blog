@@ -38,7 +38,7 @@ router.get('/posts/:id', async(req, res) => {
     const post = postData.get({ plain: true });
 
     res.render('create-comment', { ...post, logged_in: req.session.logged_in });
-    res.status(200).json(postData)
+
 
   } catch (err) {
     res.status(500).json(err);
