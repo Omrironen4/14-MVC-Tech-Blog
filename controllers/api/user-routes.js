@@ -1,13 +1,20 @@
 const router = require('express').Router();
-const { Comment, Pet, Post, User } = require('../../models');
+const { Comment, Post, User } = require('../../models');
  
 // GET all users
 router.get('/', async(req, res) => {
 try {
   const userData = await User.findAll({
-    include: [{ model: Pet }],
+    include: [
+      {
+        model: Post
+      },
+      {
+        model: Comment
+      },
+    ]
   });
-    // const userArr = userData.map((user2) => user2.get({ plain: true });
+    // const userArr = userData.map((user) => user.get({ plain: true }));
   res.status(200).json(userData);
   //view page must be filled.
   //  res.render('', {
