@@ -5,11 +5,11 @@ const { Comment, Post, User } = require('../models');
 // dashboard route
 router.get('/', async(req, res) => {
 try {
-  const data = await User.findAll({
-    include: [{ model: Comment }, { model: Post }],
+  const postData = await Post.findAll({
+    include: [{ model: User }],
   });
-    //  for rendering pg
-  const dataArr = dataArr.map((posts) => posts.get({ plain: true }));
+    // serializing the data
+  const posts = postData.map((posts) => posts.get({ plain: true }));
   res.render('homepage'), {
       posts,
       logged_in: req.session.logged_in
