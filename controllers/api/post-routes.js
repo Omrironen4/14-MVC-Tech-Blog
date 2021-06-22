@@ -1,6 +1,6 @@
 // import routes and models
 const router = require('express').Router();
-const { Comment, Pet, Post, User } = require('../../models');
+const { Comment, Post, User } = require('../../models');
 
 // GET all posts
 router.get('/', async(req, res) => {
@@ -37,7 +37,6 @@ router.post('/', async(req, res) => {
 try {
     const postData = await Post.create({
         title: req.body.title,
-        category: req.body.category,
         description: req.body.description,
         user_id: req.body.user_id
     });
