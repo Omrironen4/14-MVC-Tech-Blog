@@ -3,7 +3,7 @@ const {Post} = require('../models');
 const postData = [
     {
         title: 'Checkout the new mysql3!',
-        date: getDate(),
+        date: 1,
         description: 'Just kidding it did not come out yet.',
         user_id: 1,
     },
