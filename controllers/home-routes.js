@@ -2,31 +2,67 @@
 const router = require('express').Router();
 const { Comment, Post, User } = require('../models');
 
-// dashboard route
+// home route
 router.get('/', async(req, res) => {
-try {
-  const postData = await Post.findAll({
-    include: [{ model: User }],
-  });
-    // serializing the data
-  const posts = postData.map((posts) => posts.get({ plain: true }));
-  res.render('homepage', { posts, logged_in: req.session.logged_in });
+  try {
+    const postData = await Post.findAll({
+      include: [{ model: User }]
+    });
 
-  // res.status(200).json(posts);
+    // serialize the data
+    const posts = postData.map((post) => post.get({ plain: true }));
 
-} catch (err) {
-  res.status(500).json(err);
-}
+    // res.status(200).json(postData);
+    res.render('homepage', { posts, logged_in: req.session.logged_in });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// new post route
-router.get('/create-post', (req, res) => {
+// single post route
+router.get('/posts/:id', async(req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        { model: User },
+        { model: Comment, include: { model: User } }
+      ]
+    });
 
+    // serialize the data
+    const post = postData.get({ plain: true });
+
+    // res.status(200).json(postData);
+    res.render('create-comment', { ...post, logged_in: req.session.logged_in });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// edit post route
-router.get('/edit-post/:id', async(req, res) => {
+// login route
+router.get('/login', (req, res) => {
+  
+  // if the user is logged in, redirect to homepage
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
 
+  res.render('login');
+});
+
+// sign up route
+router.get('/signup', (req, res) => {
+  
+  // if the user is logged in, redirect to homepage
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+  
+  res.render('sign-up');
 });
 
 module.exports = router;
