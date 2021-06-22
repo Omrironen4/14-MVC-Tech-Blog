@@ -10,11 +10,10 @@ try {
   });
     // serializing the data
   const posts = postData.map((posts) => posts.get({ plain: true }));
-  res.render('homepage'), {
-      posts,
-      logged_in: req.session.logged_in
-  }
-  res.status(200).json(data);
+  res.render('homepage', { posts, logged_in: req.session.logged_in });
+
+  // res.status(200).json(posts);
+
 } catch (err) {
   res.status(500).json(err);
 }
