@@ -1,6 +1,6 @@
 // import routes and models
 const router = require('express').Router();
-const { Comment, Pet, Post, User } = require('../models');
+const { Comment, Post, User } = require('../models');
 
 // forum route
 router.get('/', async(req, res) => {
@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
     // serialize the data
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    // res.status(200).json(postData);
+    res.status(200).json(postData);
     res.render('forum', { posts, logged_in: req.session.logged_in });
 
   } catch (err) {
@@ -30,26 +30,15 @@ router.get('/posts/:id', async(req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
-        {
-          model: User,
-          attributes: ['username']
-        },
-        {
-          model: Comment,
-          attributes: ['comment'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        }
+        { model: User, }, { model: Comment, include: { model: User }}
       ]
     });
 
     // serialize the data
     const post = postData.get({ plain: true });
 
-    res.render('edit-post', { ...post, logged_in: req.session.logged_in });
-    // res.status(200).json(postData);
+    res.render('create-comment', { ...post, logged_in: req.session.logged_in });
+    res.status(200).json(postData)
 
   } catch (err) {
     res.status(500).json(err);
