@@ -1,15 +1,16 @@
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-       {{!-- this should get the username --}}
-  <div class="card-header">{{username}}</div>
-  <div class="card-body">
-      {{!-- this should give a badge with the category --}}
-      <span class="badge rounded-pill bg-warning">{{category}}</span>
-        {{!-- text input area --}}
-    <div class="form-group">
-      <label for="exampleTextarea" class="form-label mt-4">Post</label>
-      {{!-- this should get the text input under description --}}
-      <textarea class="form-control" id="exampleTextarea" rows="3">{{description}}</textarea>
+<!-- view-post -->
+<div class="col">
+  <div class="card m-2">
+    <div class="card-header post-header post-bg">
+      <span class="post-title-txt">
+        <a class="post-link" href="/posts/{{id}}">{{title}}</a>
+      </span>
+      <span class="post-user-txt">
+        Posted by {{user.username}} on {{format_date date_created}}
+      </span>
     </div>
-    </div> 
-    
-    {{!-- will i need to add a section where the comments will attatch to the post? --}}
+    <div class="card-body body-bg">
+      {{content}}
+    </div>
+  </div>
+</div>
