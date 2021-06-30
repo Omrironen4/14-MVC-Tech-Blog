@@ -13,7 +13,11 @@ router.get('/', async(req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     // res.status(200).json(postData);
-    res.render('homepage-posts', { layout: 'homepage', posts, logged_in: req.session.logged_in });
+    res.render('homepage-posts', { 
+      layout: 'homepage', 
+      posts, 
+      logged_in: req.session.logged_in 
+    });
 
   } catch (err) {
     res.status(500).json(err);
@@ -34,7 +38,11 @@ router.get('/posts/:id', async(req, res) => {
     const post = postData.get({ plain: true });
 
     // res.status(200).json(postData);
-    res.render('create-comment', { ...post, logged_in: req.session.logged_in });
+    res.render('create-comment', { 
+      layout: 'homepage', 
+      ...post, 
+      logged_in: req.session.logged_in 
+    });
 
   } catch (err) {
     res.status(500).json(err);
@@ -50,7 +58,9 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', { 
+    layout: 'homepage'
+  });
 });
 
 // sign up route
@@ -62,7 +72,9 @@ router.get('/signup', (req, res) => {
     return;
   }
   
-  res.render('sign-up');
+  res.render('sign-up', { 
+    layout: 'homepage'
+  });
 });
 
 module.exports = router;
