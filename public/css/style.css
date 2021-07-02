@@ -9,7 +9,7 @@
   }    
   
   .header-bg {
-    background-color: #ea698b;
+    background-color: #345;
   }  
   
   /* post properties */
@@ -30,7 +30,7 @@
   }  
   
   .post-bg {
-    background-color: #c05299;
+    background-color: green;
   }
   
   /* comment properties */
@@ -43,7 +43,7 @@
   }    
   
   .comment-bg {
-    background-color: #973aa8;
+    background-color: #345;
   }
   
   /* action properties */
@@ -61,11 +61,11 @@
   }      
   
   .btn-bg {
-    background-color: #6411ad;
+    background-color: green;
   }
   
   .btn-bg:hover {
-    background-color: #47126b;
+    background-color:green;
     color: #ffffff;
   }
   
