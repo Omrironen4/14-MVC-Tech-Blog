@@ -36,6 +36,7 @@ router.get('/posts/:id', async(req, res) => {
 
     // serialize the data
     const post = postData.get({ plain: true });
+    console.log(post);
 
     // res.status(200).json(postData);
     res.render('create-comment', { 

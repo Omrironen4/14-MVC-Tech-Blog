@@ -17,6 +17,7 @@ router.get('/', withAuth, async(req, res) => {
 
     // serialize the data
     const posts = postData.map((post) => post.get({ plain: true }));
+    console.log(posts)
     
     // res.status(200).json(postData);
     res.render('dashboard-posts', { 
